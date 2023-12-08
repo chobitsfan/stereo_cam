@@ -166,15 +166,23 @@ StereoCalib(const vector<string>& imagelist, Size boardSize, float squareSize, b
     cout << "Running stereo calibration ...\n";
 
     Mat cameraMatrix[2], distCoeffs[2];
-    cameraMatrix[0] = (Mat_<double>(3,3) << 4.5871895544956595e+02, 0., 3.3657517879988706e+02, 0.,4.5873147178036533e+02, 2.1628073654244133e+02, 0., 0., 1.);
-    distCoeffs[0] = (Mat_<double>(5,1) << 5.7076449331591138e-02, -4.7450762182942974e-02, -3.3333501353066592e-03, 3.5795258190291261e-04, 0.);
-    cameraMatrix[1] = (Mat_<double>(3,3) << 4.5812706153237770e+02, 0., 3.2301901906538336e+02, 0., 4.5787818725258467e+02, 2.2334506060755325e+02, 0., 0., 1.);
-    distCoeffs[1] = (Mat_<double>(5,1) << 5.3889271815474718e-02, -5.3415172791704893e-02, -4.7030040966682882e-03, 1.0284987824595350e-03, 0.);
+    cameraMatrix[0] = (Mat_<double>(3,3) <<
+        4.5871894208851108e+02, 0., 3.3657516241366756e+02, 0.,
+        4.5873145101846643e+02, 2.1628074178739521e+02, 0., 0., 1.);
+    distCoeffs[0] = (Mat_<double>(5,1) <<
+        5.7076163517889071e-02, -4.7449852647679529e-02,
+       -3.3333133411082233e-03, 3.5791943710580180e-04, 0.);
+    cameraMatrix[1] = (Mat_<double>(3,3) <<
+        4.5835888364887256e+02, 0., 3.2070900760895131e+02, 0.,
+        4.5836189927937050e+02, 2.2369740035407133e+02, 0., 0., 1.);
+    distCoeffs[1] = (Mat_<double>(5,1) << 
+        5.9085906436082768e-02, -6.2062049999354461e-02,
+       -4.2127875324890858e-03, -4.0428396364065671e-04, 0.);
     //cameraMatrix[0] = initCameraMatrix2D(objectPoints,imagePoints[0],imageSize,0);
     //cameraMatrix[1] = initCameraMatrix2D(objectPoints,imagePoints[1],imageSize,0);
     Mat R, T, E, F;
     R = (Mat_<double>(3,3) << 1, 0, 0, 0, 1, 0, 0, 0, 1);
-    T = (Mat_<double>(3,1) << 1, 0, 0);
+    T = (Mat_<double>(3,1) << -0.1, 0, 0);
     Mat perViewErrors;
 
     double rms = stereoCalibrate(objectPoints, imagePoints[0], imagePoints[1],
